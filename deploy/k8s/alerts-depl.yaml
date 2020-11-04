@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: alertapi-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: alertsapi
+    template:
+        metadata:
+            labels:
+                app: alertsapi
+        spec:
+            containers:
+                - name: alertsapi
+                  image: phalder/alertsapi
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: alertapi-service
+spec:
+    type: NodePort
+    selector:
+        app: alertsapi
+    ports:
+        - name: alertsapi
+          protocol: TCP    
+          port: 8001
+          # From Docker Override file
+          targetPort: 80
+            # Optional field
+            # By default and for convenience, the Kubernetes control plane will allocate a port from a range (default: 30000-32767)
+          nodePort: 30008

@@ -15,6 +15,11 @@ spec:
             containers:
                 - name: userapi
                   image: phalder/userapi
+                  env:
+                  - name: "ASPNETCORE_ENVIRONMENT"
+                    value: "Development"
+                  - name: UserDBSettings__ConnectionString
+                    value: "mongodb://userservicedb:27017"
 ---
 apiVersion: v1
 kind: Service

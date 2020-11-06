@@ -3,7 +3,6 @@ version: '3.4'
 services:
     userservicedb:
         container_name: userservicedb
-        restart: always
         volumes:
             - ${WEBAPP_STORAGE_HOME}/site:/data/db
         ports:
@@ -23,7 +22,6 @@ services:
 
     alertservicedb:
         container_name: alertservicedb
-        restart: always
         ports:
             - "6379:6379"
 
